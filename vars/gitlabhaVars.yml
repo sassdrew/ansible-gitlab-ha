@@ -1,0 +1,62 @@
+# Load Balancer Vars
+rails_1_dns: 
+rails_2_dns: 
+rails_3_dns: 
+pgbouncer_1_dns: 
+pgbouncer_2_dns: 
+pgbouncer_3_dns: 
+praefect_1_dns: 
+praefect_2_dns: 
+praefect_3_dns: 
+
+# Gitlab RB Vars
+consul_servers_dns: ""
+# gitlab-ctl pg-password-md5 gitlab
+gitlab_postgres_hash: ""
+gitlab_postgres_password: ""
+# gitlab-ctl pg-password-md5 pgbouncer
+gitlab_pgbouncer_hash: ""
+# gitlab-ctl pg-password-md5 gitlab_replicator
+gitlab_replicator_hash: ""
+# gitlab-ctl pg-password-md5 gitlab-consul
+gitlab_consul_hash: ""
+# gitlab-ctl pg-password-md5 praefect
+gitlab_praefect_hash: ""
+praefect_postgresql_password: ""
+
+patroni_username: ""
+patroni_password: ""
+trust_cidr: ""
+
+redis_password: ""
+redis_master_ip: ""
+
+praefect_db_dns: ""
+praefect_external_token: ""
+praefect_internal_token: ""
+
+gitlab_api_internal_url: ""
+gitlab_external_url: ""
+gitlab_internal_dns: ""
+
+redis_1_dns: ""
+redis_2_dns: ""
+redis_3_dns: ""
+
+postgres_1_dns: ""
+postgres_2_dns: ""
+postgres_3_dns: ""
+
+gitlay_1_dns: ""
+gitlay_2_dns: ""
+gitlay_3_dns: ""
+
+prometheus_ip: ""
+
+# Minio connectivity
+minio_access_key: ""
+minio_secret_key: ""
+minio_endpoint_url: ""
+minio_default_bucket: ""
+minio_backup_bucket: ""
+minio_ci_secure_bukcet: ""

@@ -1,0 +1,29 @@
+---
+- name: Install Gitlab HA LB
+  hosts: '{{ hostname }}'
+  become: true
+  become_user: root
+  vars_files:
+    - vars/gitlabhaVars.yml
+  tasks:
+    - name: Install haproxy
+      ansible.builtin.yum:
+        name: haproxy
+        state: latest 
+
+    - name: copy internal haproxy configuration
+      template:
+        src: templates/internal-haproxy.cfg.j2
+        dest: /etc/haproxy/haproxy.cfg
+      when: "inventory_hostname == 'gitlab-internal'"
+
+    - name: copy internal haproxy configuration
+      template:
+        src: templates/external-haproxy.cfg.j2
+        dest: /etc/haproxy/haproxy.cfg
+      when: "inventory_hostname == 'gitlab-external'"
+
+    - name: Restart haproxy
+      ansible.builtin.service:
+        name: haproxy
+        state: restarted

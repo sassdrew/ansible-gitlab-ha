@@ -1,0 +1,40 @@
+global
+    log /dev/log local0
+    log localhost local1 notice
+
+defaults
+    log global
+    default-server inter 10s fall 3 rise 2
+    balance leastconn
+
+frontend internal-pgbouncer-tcp-in
+    bind *:6432
+    mode tcp
+    option tcplog
+
+    default_backend pgbouncer
+
+frontend internal-praefect-tcp-in
+    bind *:2305
+    mode tcp
+    option tcplog
+    option clitcpka
+
+    default_backend praefect
+
+backend pgbouncer
+    mode tcp
+    option tcp-check
+
+    server pgbouncer1 {{ pgbouncer_1_dns }}:6432 check
+    server pgbouncer2 {{ pgbouncer_2_dns }}:6432 check
+    server pgbouncer3 {{ pgbouncer_3_dns }}:6432 check
+
+backend praefect
+    mode tcp
+    option tcp-check
+    option srvtcpka
+
+    server praefect1 {{ praefect_1_dns }}:2305 check
+    server praefect2 {{ praefect_1_dns }}:2305 check
+    server praefect3 {{ praefect_1_dns }}:2305 check

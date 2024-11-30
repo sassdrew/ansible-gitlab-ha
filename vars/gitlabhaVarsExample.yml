@@ -1,0 +1,62 @@
+# Load Balancer Vars
+rails_1_dns: gitlab-rails-1.dragon.local
+rails_2_dns: gitlab-rails-2.dragon.local
+rails_3_dns: gitlab-rails-3.dragon.local
+pgbouncer_1_dns: gitlab-pgbouncer-1.dragon.local
+pgbouncer_2_dns: gitlab-pgbouncer-2.dragon.local
+pgbouncer_3_dns: gitlab-pgbouncer-3.dragon.local
+praefect_1_dns: gitlab-praefect-1.dragon.local
+praefect_2_dns: gitlab-praefect-2.dragon.local
+praefect_3_dns: gitlab-praefect-3.dragon.local
+
+# Gitlab RB Vars
+consul_servers_dns: "gitlab-consul-1.dragon.local gitlab-consul-2.dragon.local gitlab-consul-3.dragon.local"
+# gitlab-ctl pg-password-md5 gitlab
+gitlab_postgres_hash: "5a171f1a919516e72340518bf1a6706c"
+gitlab_postgres_password: "F44YNuCuPPlp64"
+# gitlab-ctl pg-password-md5 pgbouncer
+gitlab_pgbouncer_hash: "a3c92b7fb33b2859f6c47ee9d0b93fb3"
+# gitlab-ctl pg-password-md5 gitlab_replicator
+gitlab_replicator_hash: "3076f34bea740eb8b7019cd434363838"
+# gitlab-ctl pg-password-md5 gitlab-consul
+gitlab_consul_hash: "7a50c53a8ba88227ba28a8d38fa65a20"
+# gitlab-ctl pg-password-md5 praefect
+gitlab_praefect_hash: "6bbf139522177be6c6fd7ce602519556"
+praefect_postgresql_password: "b5LO1Uta7g6Pkr"
+
+patroni_username: "patroni"
+patroni_password: "rd3Io4gZMQSmX1"
+trust_cidr: "172.16.1.0/24"
+
+redis_password: "ZcPOQdHO3PLU4K"
+redis_master_ip: "172.16.1.135"
+
+praefect_db_dns: "gitlab-praefect-db.dragon.local"
+praefect_external_token: "746c817eb5a1c12b571f0116fcda1c45d21751aa13a8183cc05f4dbbad7e5527"
+praefect_internal_token: "b40f340dbe976cf830e4c818a88a04b96b1cc1b146e7f7e44988ae696970b423"
+
+gitlab_api_internal_url: "https://gitlabha.dragon.local"
+gitlab_external_url: "https://gitlabha.dragon.local"
+gitlab_internal_dns: "gitlab-internal.dragon.local"
+
+redis_1_dns: "gitlab-redis-1.dragon.local"
+redis_2_dns: "gitlab-redis-2.dragon.local"
+redis_3_dns: "gitlab-redis-3.dragon.local"
+
+postgres_1_dns: "gitlab-postgres-1.dragon.local"
+postgres_2_dns: "gitlab-postgres-2.dragon.local"
+postgres_3_dns: "gitlab-postgres-3.dragon.local"
+
+gitlay_1_dns: "gitlab-gitaly-1.dragon.local"
+gitlay_2_dns: "gitlab-gitaly-2.dragon.local"
+gitlay_3_dns: "gitlab-gitaly-3.dragon.local"
+
+prometheus_ip: "172.16.1.150"
+
+# Minio connectivity
+minio_access_key: "GXNKgrxWj4YYbizk4mSY"
+minio_secret_key: "Pg9ZbaIsvefx1GInfFlb9XQOWzM6iyhJGApWO1kj"
+minio_endpoint_url: "http://minio.dragon.local:9000"
+minio_default_bucket: "gitlab-bucket"
+minio_backup_bucket: "gitlab-backup"
+minio_ci_secure_bukcet: "gitlab-ci-secure"

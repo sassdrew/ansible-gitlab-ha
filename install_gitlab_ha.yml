@@ -1,0 +1,50 @@
+---
+- name: Install Gitlab HA
+  hosts: '{{ hostname }}'
+  become: true
+  become_user: root
+  serial: '{{ serial_number | default("1") }}'
+  vars_files:
+    - vars/gitlabhaVars.yml
+  tasks:
+    - name: Install pre-req packages
+      ansible.builtin.yum:
+        name: "{{ item }}"
+        state: latest
+      with_items: 
+        - curl 
+        - openssh-server
+        - perl
+
+    - name: Add Gitlab Repo
+      ansible.builtin.shell: "curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.rpm.sh | sudo bash"
+      args:
+        creates: /etc/yum.repos.d/gitlab_gitlab-ee.repo
+
+    - name: Install Gitlab 
+      ansible.builtin.yum:
+        name: "gitlab-ee-17.5.1-ee.0.el8"
+        state: present
+
+    - name: Update /etc/gitlab/gitlab.rb
+      ansible.builtin.template:
+        src: templates/gitlab.rb.j2
+        dest: /etc/gitlab/gitlab.rb
+        owner: root
+        group: root
+        mode: '0600'
+      register: template
+
+    - name: Reconfigure Gitlab
+      ansible.builtin.shell: "gitlab-ctl reconfigure"
+      when: template.changed
+
+    - name: Restart Gitlab
+      ansible.builtin.shell: "gitlab-ctl restart"
+      when: template.changed
+
+    - name: skip auto reconfigure
+      ansible.builtin.file:
+        path: /etc/gitlab/skip-auto-reconfigure
+        state: touch
+      when: "('praefect' in inventory_hostname and 'db' not in inventory_hostname) or 'sidekiq' in inventory_hostname or 'rails' in inventory_hostname"

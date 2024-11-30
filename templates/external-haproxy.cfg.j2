@@ -1,0 +1,22 @@
+global
+    log /dev/log local0
+    log localhost local1 notice
+
+defaults
+    log global
+    default-server inter 10s fall 3 rise 2
+    balance leastconn
+
+frontend https_front
+    bind *:443 ssl crt /etc/ssl/haproxy-selfsigned.pem
+    mode http
+    default_backend web_servers
+
+backend web_servers
+    mode http
+    balance roundrobin
+    option forwardfor
+    http-request set-header X-Forwarded-Proto https if { ssl_fc }
+    server web1 {{ rails_1_dns }}:80 check
+    server web2 {{ rails_2_dns }}:80 check
+    server web3 {{ rails_3_dns }}:80 check
